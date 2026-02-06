@@ -91,7 +91,7 @@ export default function HomePage() {
               textAlign: "left",
             }}
           >
-            The Noticing Book
+            Noticing Book
           </h1>
 
           {/* Rule */}
