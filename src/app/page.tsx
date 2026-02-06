@@ -1,13 +1,13 @@
 export default function HomePage() {
   const COLORS = {
-    bg: "#f4f1ec",          // warm paper
+    bg: "#f4f1ec", // warm paper
     card: "rgba(255,255,255,0.90)",
-    text: "#1f2933",        // charcoal
-    subtext: "#5b6770",     // muted slate
-    border: "rgba(31,41,51,0.10)",
-    forest: "#2f4f3e",      // deep forest
+    text: "#1f2933", // charcoal
+    subtext: "#5b6770",
+    border: "rgba(31,41,51,0.12)",
+    forest: "#2f4f3e",
     forestHover: "#263f32",
-    clay: "#b08968",        // warm clay accent
+    clay: "#b08968",
     olive: "#6b7f62",
   };
 
@@ -22,7 +22,7 @@ export default function HomePage() {
       }}
     >
       <div style={{ width: "100%", maxWidth: 900 }}>
-        {/* Small top label (quiet, firm) */}
+        {/* Small top label */}
         <div
           style={{
             display: "flex",
@@ -65,7 +65,6 @@ export default function HomePage() {
             boxShadow: "0 22px 44px rgba(0,0,0,0.12)",
           }}
         >
-          {/* Title */}
           <h1
             style={{
               margin: 0,
@@ -80,7 +79,6 @@ export default function HomePage() {
             The Noticing Book
           </h1>
 
-          {/* Subtitle */}
           <p
             style={{
               marginTop: 18,
@@ -95,7 +93,6 @@ export default function HomePage() {
             A quiet place to record what you see, notice patterns, and support growth over time.
           </p>
 
-          {/* Buttons */}
           <div
             style={{
               display: "flex",
@@ -107,6 +104,7 @@ export default function HomePage() {
             }}
           >
             <a
+              className="btnPrimary"
               href="/noticing"
               style={{
                 padding: "12px 24px",
@@ -117,24 +115,16 @@ export default function HomePage() {
                 textDecoration: "none",
                 boxShadow: "0 10px 22px rgba(47,79,62,0.20)",
                 border: "1px solid rgba(255,255,255,0.18)",
-                transition: "transform 120ms ease, background 120ms ease",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = COLORS.forestHover;
-                (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = COLORS.forest;
-                (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0px)";
               }}
             >
               Begin to Notice <span aria-hidden>→</span>
             </a>
 
             <a
+              className="btnSecondary"
               href="/noticed"
               style={{
                 padding: "12px 24px",
@@ -144,25 +134,16 @@ export default function HomePage() {
                 fontWeight: 600,
                 textDecoration: "none",
                 border: `1px solid ${COLORS.clay}`,
-                transition: "transform 120ms ease, background 120ms ease",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "rgba(176,137,104,0.10)";
-                (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(-1px)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-                (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0px)";
               }}
             >
               The Noticed <span aria-hidden>→</span>
             </a>
           </div>
 
-          {/* Divider line (quiet structure) */}
+          {/* Divider */}
           <div
             aria-hidden
             style={{
@@ -173,7 +154,7 @@ export default function HomePage() {
             }}
           />
 
-          {/* Descriptors / Feature tiles */}
+          {/* Descriptors */}
           <div
             style={{
               display: "grid",
@@ -182,18 +163,9 @@ export default function HomePage() {
             }}
           >
             {[
-              {
-                title: "Local-first",
-                body: "Your notes stay on your device.",
-              },
-              {
-                title: "Patterns over time",
-                body: "Tags and gentle structure, not paperwork.",
-              },
-              {
-                title: "Useable summaries",
-                body: "Turn noticing into growth stories.",
-              },
+              { title: "Local-first", body: "Your notes stay on your device." },
+              { title: "Patterns over time", body: "Tags and gentle structure, not paperwork." },
+              { title: "Useable summaries", body: "Turn noticing into growth stories." },
             ].map((f) => (
               <div
                 key={f.title}
@@ -221,7 +193,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Footer whisper */}
           <div
             style={{
               marginTop: 28,
@@ -244,8 +215,26 @@ export default function HomePage() {
             </span>
             <span style={{ color: COLORS.olive }}>Grounded by design</span>
           </div>
+
+          {/* Hover styles (no JS, works in Server Components) */}
+          <style>{`
+            .btnPrimary, .btnSecondary {
+              transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+            }
+            .btnPrimary:hover {
+              background: ${COLORS.forestHover};
+              transform: translateY(-1px);
+              box-shadow: 0 12px 26px rgba(47,79,62,0.22);
+            }
+            .btnSecondary:hover {
+              background: rgba(176,137,104,0.10);
+              transform: translateY(-1px);
+            }
+          `}</style>
         </section>
       </div>
     </main>
   );
 }
+
+
