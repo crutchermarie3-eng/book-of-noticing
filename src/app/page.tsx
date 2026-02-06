@@ -1,16 +1,4 @@
 export default function HomePage() {
-  const COLORS = {
-    bg: "#f4f1ec", // warm paper
-    card: "rgba(255,255,255,0.90)",
-    text: "#1f2933", // charcoal
-    subtext: "#5b6770",
-    border: "rgba(31,41,51,0.12)",
-    forest: "#2f4f3e",
-    forestHover: "#263f32",
-    clay: "#b08968",
-    olive: "#6b7f62",
-  };
-
   return (
     <main
       style={{
@@ -18,50 +6,16 @@ export default function HomePage() {
         display: "grid",
         placeItems: "center",
         padding: 40,
-        background: COLORS.bg,
+        background: "#f4f1ec",
       }}
     >
       <div style={{ width: "100%", maxWidth: 900 }}>
-        {/* Small top label */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: 18,
-          }}
-        >
-          <div
-            aria-hidden
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 14,
-              background: "rgba(255,255,255,0.75)",
-              border: `1px solid ${COLORS.border}`,
-              boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
-            }}
-          />
-          <div
-            style={{
-              fontSize: 13,
-              fontWeight: 600,
-              letterSpacing: 0.5,
-              color: COLORS.subtext,
-              textTransform: "uppercase",
-            }}
-          >
-            The Noticing Book
-          </div>
-        </div>
-
-        {/* Card */}
         <section
           style={{
-            background: COLORS.card,
+            background: "rgba(255,255,255,0.90)",
             borderRadius: 22,
             padding: "56px 56px 44px",
-            border: `1px solid ${COLORS.border}`,
+            border: "1px solid rgba(31,41,51,0.12)",
             boxShadow: "0 22px 44px rgba(0,0,0,0.12)",
           }}
         >
@@ -71,7 +25,7 @@ export default function HomePage() {
               fontSize: 56,
               fontWeight: 650,
               letterSpacing: -0.6,
-              color: COLORS.text,
+              color: "#1f2933",
               lineHeight: 1.05,
               textAlign: "left",
             }}
@@ -85,7 +39,7 @@ export default function HomePage() {
               marginBottom: 30,
               fontSize: 18,
               lineHeight: 1.7,
-              color: COLORS.subtext,
+              color: "#5b6770",
               maxWidth: 640,
               textAlign: "left",
             }}
@@ -93,23 +47,14 @@ export default function HomePage() {
             A quiet place to record what you see, notice patterns, and support growth over time.
           </p>
 
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 14,
-              alignItems: "center",
-              justifyContent: "flex-start",
-              marginBottom: 26,
-            }}
-          >
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 26 }}>
             <a
               className="btnPrimary"
               href="/noticing"
               style={{
                 padding: "12px 24px",
                 borderRadius: 999,
-                background: COLORS.forest,
+                background: "#2f4f3e",
                 color: "#ffffff",
                 fontWeight: 600,
                 textDecoration: "none",
@@ -130,10 +75,10 @@ export default function HomePage() {
                 padding: "12px 24px",
                 borderRadius: 999,
                 background: "transparent",
-                color: COLORS.text,
+                color: "#1f2933",
                 fontWeight: 600,
                 textDecoration: "none",
-                border: `1px solid ${COLORS.clay}`,
+                border: "1px solid #b08968",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 8,
@@ -143,7 +88,6 @@ export default function HomePage() {
             </a>
           </div>
 
-          {/* Divider */}
           <div
             aria-hidden
             style={{
@@ -154,7 +98,6 @@ export default function HomePage() {
             }}
           />
 
-          {/* Descriptors */}
           <div
             style={{
               display: "grid",
@@ -173,56 +116,23 @@ export default function HomePage() {
                   borderRadius: 18,
                   padding: 16,
                   background: "rgba(255,255,255,0.65)",
-                  border: `1px solid ${COLORS.border}`,
+                  border: "1px solid rgba(31,41,51,0.12)",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: COLORS.text,
-                    marginBottom: 6,
-                  }}
-                >
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#1f2933", marginBottom: 6 }}>
                   {f.title}
                 </div>
-                <div style={{ fontSize: 14, lineHeight: 1.55, color: COLORS.subtext }}>
-                  {f.body}
-                </div>
+                <div style={{ fontSize: 14, lineHeight: 1.55, color: "#5b6770" }}>{f.body}</div>
               </div>
             ))}
           </div>
 
-          <div
-            style={{
-              marginTop: 28,
-              fontSize: 13,
-              color: COLORS.subtext,
-              display: "flex",
-              gap: 10,
-              alignItems: "center",
-              flexWrap: "wrap",
-              justifyContent: "flex-start",
-            }}
-          >
-            <span>Made for quiet, consistent observation.</span>
-            <span aria-hidden style={{ color: COLORS.clay }}>
-              •
-            </span>
-            <span>Privacy-minded</span>
-            <span aria-hidden style={{ color: COLORS.clay }}>
-              •
-            </span>
-            <span style={{ color: COLORS.olive }}>Grounded by design</span>
-          </div>
-
-          {/* Hover styles (no JS, works in Server Components) */}
           <style>{`
             .btnPrimary, .btnSecondary {
               transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
             }
             .btnPrimary:hover {
-              background: ${COLORS.forestHover};
+              background: #263f32;
               transform: translateY(-1px);
               box-shadow: 0 12px 26px rgba(47,79,62,0.22);
             }
@@ -230,11 +140,13 @@ export default function HomePage() {
               background: rgba(176,137,104,0.10);
               transform: translateY(-1px);
             }
+            @media (max-width: 700px) {
+              section { padding: 36px 24px !important; }
+              h1 { font-size: 42px !important; }
+            }
           `}</style>
         </section>
       </div>
     </main>
   );
 }
-
-
