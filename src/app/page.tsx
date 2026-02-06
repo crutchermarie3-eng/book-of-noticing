@@ -130,3 +130,97 @@ export default function HomePage() {
 
           {/* Divider */}
           <div
+            aria-hidden
+            style={{
+              height: 1,
+              width: "100%",
+              background: "rgba(31,41,51,0.09)",
+              margin: "18px 0 24px",
+            }}
+          />
+
+          {/* Feature tiles */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: 14,
+            }}
+          >
+            {[
+              { title: "Local-first", body: "Your notes stay on your device." },
+              { title: "Patterns over time", body: "Tags and gentle structure, not paperwork." },
+              { title: "Useable summaries", body: "Turn noticing into growth stories." },
+            ].map((f) => (
+              <div
+                key={f.title}
+                style={{
+                  borderRadius: 18,
+                  padding: 16,
+                  background: "rgba(255,255,255,0.72)",
+                  border: "1px solid rgba(176,137,104,0.22)",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 750,
+                    color: "#1f2933",
+                    marginBottom: 6,
+                  }}
+                >
+                  {f.title}
+                </div>
+                <div style={{ fontSize: 14, lineHeight: 1.55, color: "#5b6770" }}>
+                  {f.body}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Footer whisper */}
+          <div
+            style={{
+              marginTop: 26,
+              fontSize: 13,
+              color: "#5b6770",
+              display: "flex",
+              gap: 10,
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <span>Made for quiet, consistent observation.</span>
+            <span aria-hidden style={{ color: "#b08968" }}>
+              •
+            </span>
+            <span>Privacy-minded</span>
+            <span aria-hidden style={{ color: "#b08968" }}>
+              •
+            </span>
+            <span style={{ color: "#6b7f62" }}>Grounded by design</span>
+          </div>
+
+          {/* Responsive (minimal + safe) */}
+          <style>{`
+            @media (max-width: 760px) {
+              section {
+                padding: 38px 24px 28px !important;
+              }
+              h1 {
+                font-size: 40px !important;
+              }
+              p {
+                font-size: 17px !important;
+              }
+              div[style*="grid-template-columns: repeat(3"] {
+                grid-template-columns: 1fr !important;
+              }
+            }
+          `}</style>
+        </section>
+      </div>
+    </main>
+  );
+}
