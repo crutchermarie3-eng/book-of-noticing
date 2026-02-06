@@ -6,18 +6,26 @@ export default function HomePage() {
         display: "grid",
         placeItems: "center",
         padding: 32,
-        background: "#f6f7f4",
+        background: "linear-gradient(#f8fafc, #ecfdf5)",
         textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: 640, width: "100%" }}>
+      <div
+        style={{
+          maxWidth: 720,
+          width: "100%",
+          background: "rgba(255,255,255,0.85)",
+          borderRadius: 24,
+          padding: 40,
+          boxShadow: "0 20px 40px rgba(15,23,42,0.15)",
+        }}
+      >
         <h1
           style={{
-            fontSize: 42,
-            fontWeight: 500,
-            marginBottom: 14,
-            color: "#4f6f63",
-            letterSpacing: "0.4px",
+            fontSize: 48,
+            fontWeight: 600,
+            color: "#1e293b",
+            marginBottom: 16,
           }}
         >
           The Noticing Book
@@ -25,37 +33,25 @@ export default function HomePage() {
 
         <p
           style={{
-            opacity: 0.75,
-            lineHeight: 1.7,
-            marginBottom: 36,
-            maxWidth: 520,
-            marginLeft: "auto",
-            marginRight: "auto",
-            fontSize: 16,
+            fontSize: 18,
+            lineHeight: 1.6,
+            color: "#475569",
+            marginBottom: 32,
           }}
         >
-          A quiet place to record what you see, notice patterns, and support
-          growth over time.
+          A quiet place to record what you see, notice patterns, and support growth over time.
         </p>
 
-        <div
-          style={{
-            display: "flex",
-            gap: 16,
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
+        <div style={{ display: "flex", justifyContent: "center", gap: 16 }}>
           <a
             href="/noticing"
             style={{
-              padding: "11px 22px",
+              padding: "12px 24px",
               borderRadius: 999,
-              textDecoration: "none",
+              background: "#047857",
+              color: "white",
               fontWeight: 500,
-              background: "#e7efe9",
-              color: "#3f5f55",
-              border: "1px solid rgba(79,111,99,0.25)",
+              textDecoration: "none",
             }}
           >
             Begin to Notice →
@@ -64,13 +60,12 @@ export default function HomePage() {
           <a
             href="/noticed"
             style={{
-              padding: "11px 22px",
+              padding: "12px 24px",
               borderRadius: 999,
+              border: "1px solid #cbd5e1",
+              color: "#334155",
               textDecoration: "none",
-              fontWeight: 500,
-              background: "#f3f6f4",
-              color: "#4f6f63",
-              border: "1px solid rgba(79,111,99,0.2)",
+              background: "white",
             }}
           >
             The Noticed →
