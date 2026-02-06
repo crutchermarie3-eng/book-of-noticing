@@ -75,7 +75,7 @@ export default function HomePage() {
                 color: slate,
               }}
             >
-              The Noticing Book
+              The Spiral Companion's
             </div>
           </div>
 
