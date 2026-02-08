@@ -40,6 +40,83 @@ function normalizeName(s: string) {
   return s.trim().replace(/\s+/g, " ").toLowerCase();
 }
 
+function safeTimeMs(iso: string) {
+  const t = new Date(iso).getTime();
+  return Number.isFinite(t) ? t : NaN;
+}
+
+function RhythmStrip({
+  entries,
+  label = "Observations across time (last 30 days)",
+  onJump,
+}: {
+  entries: Array<{ id: string; createdAt: string; tags?: string[] }>;
+  label?: string;
+  onJump: (id: string) => void;
+}) {
+  const now = Date.now();
+  const start = now - 30 * 24 * 60 * 60 * 1000;
+
+  const recent = useMemo(() => {
+    return entries
+      .map((e) => ({ ...e, t: safeTimeMs(e.createdAt) }))
+      .filter((e) => Number.isFinite(e.t) && e.t >= start && e.t <= now)
+      .sort((a, b) => a.t - b.t);
+  }, [entries, start, now]);
+
+  if (recent.length === 0) return null;
+
+  const range = now - start || 1;
+
+  return (
+    <div style={{ marginTop: 6, marginBottom: 14 }}>
+      <div style={{ fontSize: 12, opacity: 0.65, marginBottom: 6 }}>
+        {label}
+      </div>
+
+      <div
+        style={{
+          position: "relative",
+          height: 18,
+          borderRadius: 999,
+          background: "rgba(0,0,0,0.06)",
+          border: "1px solid rgba(0,0,0,0.10)",
+        }}
+        aria-label="Observation rhythm strip"
+      >
+        {recent.map((e) => {
+          const leftPct = ((e.t - start) / range) * 100;
+          const title = `${new Date(e.createdAt).toLocaleString()}${
+            e.tags?.length ? " · " + e.tags.slice(0, 3).join(", ") : ""
+          }`;
+
+          return (
+            <button
+              key={e.id}
+              type="button"
+              title={title}
+              onClick={() => onJump(e.id)}
+              style={{
+                position: "absolute",
+                left: `calc(${leftPct}% - 5px)`,
+                top: 4,
+                width: 10,
+                height: 10,
+                borderRadius: 999,
+                border: "1px solid rgba(0,0,0,0.45)",
+                background: "white",
+                cursor: "pointer",
+                padding: 0,
+              }}
+              aria-label={title}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function Page() {
   const params = useParams();
   const name = decodeURIComponent(String(params?.name ?? ""));
@@ -174,9 +251,8 @@ export default function Page() {
 
   const last30DaysCount = useMemo(() => {
     const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
-    return personEntries.filter(
-      (e) => new Date(e.createdAt).getTime() >= cutoff,
-    ).length;
+    return personEntries.filter((e) => safeTimeMs(e.createdAt) >= cutoff)
+      .length;
   }, [personEntries]);
 
   const soloCount = useMemo(() => {
@@ -195,7 +271,7 @@ export default function Page() {
 
   const softSummary = useMemo(() => {
     if (personEntries.length === 0) {
-      return "Keep noticing for a little longer—patterns emerge with time.";
+      return "No observations recorded yet.";
     }
 
     const soloVsGroup =
@@ -208,7 +284,7 @@ export default function Page() {
     const strongestTag = tagCounts[0]?.[0];
     const strongestThread = strongestTag
       ? `The strongest thread right now shows up around “${strongestTag}.”`
-      : "The strongest thread will become clearer as tags build.";
+      : "A stronger thread will become clearer as tags build.";
 
     return `Recently, focus ${soloVsGroup}. ${strongestThread}`;
   }, [personEntries.length, soloCount, groupCount, tagCounts]);
@@ -216,7 +292,7 @@ export default function Page() {
   const nextBestStep = useMemo(() => {
     const strongestTag = tagCounts[0]?.[0];
     if (!strongestTag) {
-      return "Choose one small material invitation this week and watch what happens without rushing it.";
+      return "Choose one small material invitation this week and observe what returns.";
     }
     return `Offer one small invitation connected to “${strongestTag},” then observe whether it draws steady return.`;
   }, [tagCounts]);
@@ -231,6 +307,11 @@ export default function Page() {
     fontWeight: active ? 800 : 600,
     userSelect: "none" as const,
   });
+
+  const jumpToEntry = (id: string) => {
+    const el = document.getElementById(`entry-${id}`);
+    el?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const handleExportPdf = () => {
     setPrintHint(null);
@@ -660,9 +741,19 @@ export default function Page() {
 
       <h1 style={{ fontSize: 32, marginTop: 12, marginBottom: 4 }}>{name}</h1>
 
-      <p style={{ fontStyle: "italic", opacity: 0.7, marginBottom: 12 }}>
+      <p style={{ fontStyle: "italic", opacity: 0.7, marginBottom: 10 }}>
         The Unfolding
       </p>
+
+      {/* Rhythm strip (quiet, non-judgy, skips itself if no data) */}
+      <RhythmStrip
+        entries={personEntries.map((e) => ({
+          id: e.id,
+          createdAt: e.createdAt,
+          tags: e.tags ?? [],
+        }))}
+        onJump={jumpToEntry}
+      />
 
       {/* Summary box */}
       <div
@@ -975,6 +1066,7 @@ export default function Page() {
           {entries.map((e) => (
             <div
               key={e.id}
+              id={`entry-${e.id}`}
               style={{
                 border: "1px solid rgba(0,0,0,0.12)",
                 borderRadius: 12,
@@ -1007,3 +1099,4 @@ export default function Page() {
     </main>
   );
 }
+
