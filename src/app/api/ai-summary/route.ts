@@ -64,6 +64,13 @@ Rules:
 - "Concerns" should be framed as frictions or needs, not labels.
 - "Supports" should be practical: environment tweaks, invitations, grace/courtesy, scaffolds.
 - Suggest Montessori materials/lessons that could meet a concern or extend a strength.
+- Assume the child is in an Elementary Montessori classroom (ages 6–12).
+- Suggest materials and lessons as part of an album progression (follow-up, extension, or consolidation), not introductory primary work.
+- When appropriate, think in terms of:
+  • Language: Grammar Symbols, Sentence Analysis, Word Study (vowel teams, syllabication), research writing, timeline writing
+  • Math: Stamp Game (dynamic operations), Bead Frames, Checkerboard, Story Problems, Fractions (racks & tubes, skittles), Geometry exploration
+  • Cultural/Cosmic: Timeline of Life, biome research, Human Needs studies, geographic maps
+- Avoid Primary-only materials (e.g., Pink Tower, Metal Insets, Knobbed Cylinders) unless observations clearly indicate a foundational gap.
 - If unsure, set confidence "low" and say why in rationale.
 - Keep each bullet short (1–2 sentences max).
 
