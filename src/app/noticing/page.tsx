@@ -36,14 +36,13 @@ const PROMPTS: string[] = [
 ];
 
 const TAG_OPTIONS = [
-  "Concentration",
-  "Order",
-  "Will",
+  "Cognitive",
+  "Social",
   "Regulation",
-  "Orientation",
+  "Moral",
   "Independence",
   "Motor",
-  "Other",
+  "Executive",
 ] as const;
 
 function safeParse<T>(value: string | null, fallback: T): T {
