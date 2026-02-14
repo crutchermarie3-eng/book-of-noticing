@@ -55,10 +55,10 @@ export async function POST(req: Request) {
 
     const prompt = `
 You are supporting a Montessori guide who records observation notes.
-Given the student's entries across time, produce a calm, professional reflection.
+Given the student's entries across time, produce a calm, Montessori Guide reflection.
 
 Begin the reflection with a short, collaborative framing sentence such as:
-"Based on what you've noticed, here’s what seems steady right now."
+"Here’s what seems steady right now."
 This sentence should feel reflective and supportive, not evaluative.
 
 Rules:
